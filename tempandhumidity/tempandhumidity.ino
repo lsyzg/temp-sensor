@@ -1,3 +1,5 @@
+#include <DHT11.h>
+
 
 /* SevSeg Counter Example
 
@@ -23,7 +25,7 @@
 #include <DHT11.h>
 SevSeg sevseg; //Instantiate a seven segment controller object
 
-DHT11 dht11(21);
+DHT11 dht11(2);
 
 void setup() {
   byte numDigits = 4;
@@ -31,6 +33,7 @@ void setup() {
   byte digitPins[] = {6, 7, 8, 9};
   // byte segmentPins[] = {14, 15, 16, 17, 19, 20, 21, 22};
   byte segmentPins[] = {10, 11, 12, 13, 14, 15, 16, 19};
+  
   bool resistorsOnSegments = true; // 'false' means resistors are on digit pins
   byte hardwareConfig = COMMON_ANODE; // See README.md for options
   bool updateWithDelays = false; // Default 'false' is Recommended
@@ -45,20 +48,13 @@ void setup() {
 void loop() {
     // Attempt to read the temperature value from the DHT11 sensor.
     int temperature = dht11.readTemperature();
+    // int sampling = 
 
     // Check the result of the reading.
     // If there's no error, print the temperature value.
     // If there's an error, print the appropriate error message.
-    if (temperature != DHT11::ERROR_CHECKSUM && temperature != DHT11::ERROR_TIMEOUT) {
-        Serial.print("Temperature: ");
-        Serial.print(temperature);
-        Serial.println(" °C");
-        sevseg.setNumber(temperature,0);
-    } else {
-        // Print error message based on the error code.
-        Serial.println(DHT11::getErrorString(temperature));
+    sevseg.setNumber(temperature, 0);
   sevseg.refreshDisplay(); // Must run repeatedly
-  }
 }
 
 /// END ///
