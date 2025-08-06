@@ -26,6 +26,7 @@ void setup() {
   byte numDigits = 4;
   byte digitPins[] = {6, 7, 8, 9};
   byte segmentPins[] = {10, 11, 12, 13, 14, 15, 16, 19};
+  
   bool resistorsOnSegments = true; // 'false' means resistors are on digit pins
   byte hardwareConfig = COMMON_ANODE; // See README.md for options
   bool updateWithDelays = false; // Default 'false' is Recommended
